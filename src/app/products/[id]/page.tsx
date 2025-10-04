@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, use } from 'react';
 import Link from 'next/link';
 import { FiHeart, FiShoppingCart, FiShare2, FiCheck, FiTruck, FiRotateCw, FiStar } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -37,12 +37,14 @@ const product = {
   ]
 };
 
-export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+// Client Component - uses React.use() to unwrap params Promise
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   
   return <ProductDetailClient productId={id} />;
 }
 
+// Client Component - handles interactivity
 function ProductDetailClient({ productId }: { productId: string }) {
   const [selectedSize, setSelectedSize] = useState('M');
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
