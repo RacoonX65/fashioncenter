@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FiPackage, FiShoppingBag, FiUsers, FiBarChart2, FiSettings, FiPlus, FiEdit, FiTrash2, FiStar, FiTag, FiMegaphone, FiBriefcase, FiTruck, FiDollarSign, FiTrendingUp, FiSearch, FiFilter, FiDownload, FiEye } from 'react-icons/fi';
+import { FiPackage, FiShoppingBag, FiUsers, FiBarChart2, FiSettings, FiPlus, FiEdit, FiTrash2, FiStar, FiTag, FiSpeaker, FiBriefcase, FiTruck, FiDollarSign, FiTrendingUp, FiSearch, FiFilter, FiDownload, FiEye } from 'react-icons/fi';
 import { supabase } from '@/lib/supabase';
 import toast from 'react-hot-toast';
 
@@ -263,7 +263,7 @@ export default function AdminDashboard() {
                   href="/admin/campaigns"
                   className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition-colors"
                 >
-                  <FiMegaphone className="h-5 w-5" />
+                  <FiSpeaker className="h-5 w-5" />
                   <span>Campaigns</span>
                 </Link>
                 
@@ -395,7 +395,7 @@ export default function AdminDashboard() {
                   >
                     <div className="flex items-center space-x-3">
                       <div className="bg-blue-100 p-2 rounded-lg">
-                        <FiMegaphone className="h-5 w-5 text-blue-600" />
+                        <FiSpeaker className="h-5 w-5 text-blue-600" />
                       </div>
                       <div>
                         <p className="font-semibold">Campaigns</p>
@@ -547,7 +547,15 @@ export default function AdminDashboard() {
 }
 
 // Products Tab Component
-function ProductsTab({ products, onDelete, onEdit, onAdd, onRefresh }: any) {
+interface ProductsTabProps {
+  products: any[];
+  onDelete: (id: string) => void;
+  onEdit: (product: any) => void;
+  onAdd: () => void;
+  onRefresh: () => void;
+}
+
+function ProductsTab({ products, onDelete, onEdit, onAdd, onRefresh }: ProductsTabProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm">
       <div className="p-6 border-b border-gray-200">
@@ -655,7 +663,12 @@ function ProductsTab({ products, onDelete, onEdit, onAdd, onRefresh }: any) {
 }
 
 // Orders Tab Component
-function OrdersTab({ orders, onUpdate }: any) {
+interface OrdersTabProps {
+  orders: any[];
+  onUpdate: (order: any) => void;
+}
+
+function OrdersTab({ orders, onUpdate }: OrdersTabProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm">
       <div className="p-6 border-b border-gray-200">
@@ -720,7 +733,11 @@ function OrdersTab({ orders, onUpdate }: any) {
 }
 
 // Customers Tab Component
-function CustomersTab({ customers }: any) {
+interface CustomersTabProps {
+  customers: any[];
+}
+
+function CustomersTab({ customers }: CustomersTabProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm">
       <div className="p-6 border-b border-gray-200">
@@ -771,7 +788,13 @@ function CustomersTab({ customers }: any) {
 }
 
 // Order Update Modal
-function OrderUpdateModal({ order, onClose, onUpdate }: any) {
+interface OrderUpdateModalProps {
+  order: any;
+  onClose: () => void;
+  onUpdate: (orderId: string, status: string, trackingNumber?: string, courier?: string) => void;
+}
+
+function OrderUpdateModal({ order, onClose, onUpdate }: OrderUpdateModalProps) {
   const [status, setStatus] = useState(order.status);
   const [trackingNumber, setTrackingNumber] = useState(order.tracking_number || '');
   const [courier, setCourier] = useState(order.courier || 'CourierGuy');
