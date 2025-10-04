@@ -35,7 +35,13 @@ const product = {
   ]
 };
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  
+  return <ProductDetailClient productId={id} />;
+}
+
+function ProductDetailClient({ productId }: { productId: string }) {
   const [selectedSize, setSelectedSize] = useState('M');
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [quantity, setQuantity] = useState(1);
@@ -322,7 +328,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between py-2 border-b border-gray-100">
                     <span className="text-gray-600">SKU:</span>
-                    <span className="font-semibold text-gray-900">FC-{params.id.toUpperCase()}</span>
+                    <span className="font-semibold text-gray-900">FC-{productId.toUpperCase()}</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-gray-100">
                     <span className="text-gray-600">Category:</span>
