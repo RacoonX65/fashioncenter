@@ -1,14 +1,14 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export interface CartItem {
+interface CartItem {
   id: string;
   name: string;
   price: number;
-  image: string;
   quantity: number;
   size?: string;
   color?: string;
+  image?: string;
 }
 
 interface CartStore {
@@ -26,40 +26,51 @@ export const useCart = create<CartStore>()(
     (set, get) => ({
       items: [],
       
-      addItem: (item) => set((state) => {
-        const existingItem = state.items.find(
+      addItem: (item) => {
+        const items = get().items;
+        const existingItem = items.find(
           (i) => i.id === item.id && i.size === item.size && i.color === item.color
         );
-        
+
         if (existingItem) {
-          return {
-            items: state.items.map((i) =>
+          // Update quantity if item exists
+          set({
+            items: items.map((i) =>
               i.id === item.id && i.size === item.size && i.color === item.color
                 ? { ...i, quantity: i.quantity + item.quantity }
                 : i
             ),
-          };
+          });
+        } else {
+          // Add new item
+          set({ items: [...items, item] });
         }
-        
-        return { items: [...state.items, item] };
-      }),
-      
-      removeItem: (id) => set((state) => ({
-        items: state.items.filter((i) => i.id !== id),
-      })),
-      
-      updateQuantity: (id, quantity) => set((state) => ({
-        items: state.items.map((item) =>
-          item.id === id ? { ...item, quantity } : item
-        ),
-      })),
-      
-      clearCart: () => set({ items: [] }),
-      
+      },
+
+      removeItem: (id) => {
+        set({ items: get().items.filter((item) => item.id !== id) });
+      },
+
+      updateQuantity: (id, quantity) => {
+        if (quantity <= 0) {
+          get().removeItem(id);
+          return;
+        }
+        set({
+          items: get().items.map((item) =>
+            item.id === id ? { ...item, quantity } : item
+          ),
+        });
+      },
+
+      clearCart: () => {
+        set({ items: [] });
+      },
+
       getTotalItems: () => {
         return get().items.reduce((total, item) => total + item.quantity, 0);
       },
-      
+
       getTotalPrice: () => {
         return get().items.reduce(
           (total, item) => total + item.price * item.quantity,
@@ -68,8 +79,7 @@ export const useCart = create<CartStore>()(
       },
     }),
     {
-      name: 'fashion-center-cart',
+      name: 'fashioncenter-cart', // localStorage key
     }
   )
 );
-

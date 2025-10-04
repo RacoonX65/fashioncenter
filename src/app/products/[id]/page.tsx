@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { FiHeart, FiShoppingCart, FiShare2, FiCheck, FiTruck, FiRotateCw, FiStar } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import { useCart } from '@/hooks/useCart';
+import { useWishlist } from '@/hooks/useWishlist';
 
 // Mock product data - in real app, fetch from Supabase
 const product = {
@@ -47,6 +49,11 @@ function ProductDetailClient({ productId }: { productId: string }) {
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(0);
 
+  // Cart and Wishlist hooks
+  const addToCart = useCart((state) => state.addItem);
+  const { addItem: addToWishlist, isInWishlist, toggleItem } = useWishlist();
+  const isWishlisted = isInWishlist(productId);
+
   const handleShare = (platform: 'whatsapp' | 'copy') => {
     const url = window.location.href;
     const text = `Check out ${product.name} on FashionCenter!`;
@@ -60,7 +67,30 @@ function ProductDetailClient({ productId }: { productId: string }) {
   };
 
   const handleAddToCart = () => {
-    toast.success('Added to cart!');
+    addToCart({
+      id: `${productId}-${selectedSize}-${selectedColor.name}`,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+      size: selectedSize,
+      color: selectedColor.name,
+    });
+    toast.success(`Added ${quantity}x ${product.name} to cart!`);
+  };
+
+  const handleToggleWishlist = () => {
+    toggleItem({
+      id: productId,
+      name: product.name,
+      price: product.price,
+      category: product.category,
+    });
+    
+    if (isWishlisted) {
+      toast.success('Removed from wishlist');
+    } else {
+      toast.success('Added to wishlist!');
+    }
   };
 
   return (
@@ -323,9 +353,16 @@ function ProductDetailClient({ productId }: { productId: string }) {
                   <FiShoppingCart className="w-5 h-5" />
                   <span>Add to Cart</span>
                 </button>
-                <button className="w-full bg-white border-2 border-primary-600 text-primary-600 py-4 rounded-lg hover:bg-primary-50 transition-all font-bold text-lg flex items-center justify-center space-x-2">
-                  <FiHeart className="w-5 h-5" />
-                  <span>Add to Wishlist</span>
+                <button 
+                  onClick={handleToggleWishlist}
+                  className={`w-full py-4 rounded-lg transition-all font-bold text-lg flex items-center justify-center space-x-2 ${
+                    isWishlisted
+                      ? 'bg-secondary-500 text-white hover:bg-secondary-600 border-2 border-secondary-500'
+                      : 'bg-white border-2 border-primary-600 text-primary-600 hover:bg-primary-50'
+                  }`}
+                >
+                  <FiHeart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
+                  <span>{isWishlisted ? 'In Wishlist' : 'Add to Wishlist'}</span>
                 </button>
               </div>
 

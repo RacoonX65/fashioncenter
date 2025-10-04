@@ -4,12 +4,18 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FiSearch, FiUser, FiHeart, FiShoppingCart, FiMenu, FiX } from 'react-icons/fi';
+import { useCart } from '@/hooks/useCart';
+import { useWishlist } from '@/hooks/useWishlist';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const category = searchParams?.get('category') || null;
+  
+  // Get cart and wishlist counts
+  const cartCount = useCart((state) => state.getTotalItems());
+  const wishlistCount = useWishlist((state) => state.getTotalItems());
 
   // Function to check if a nav item is active
   const isActive = (path: string, categoryName?: string) => {
@@ -103,14 +109,21 @@ const Header: React.FC = () => {
             <Link href="/auth/signin" className="hidden sm:flex p-2 hover:bg-gray-50 rounded-lg transition-colors" aria-label="Account">
               <FiUser className="w-5 h-5 text-gray-600" />
             </Link>
-            <Link href="/wishlist" className="hidden sm:flex p-2 hover:bg-gray-50 rounded-lg transition-colors" aria-label="Wishlist">
+            <Link href="/wishlist" className="hidden sm:flex p-2 hover:bg-gray-50 rounded-lg transition-colors relative" aria-label="Wishlist">
               <FiHeart className="w-5 h-5 text-gray-600" />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-secondary-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+                  {wishlistCount}
+                </span>
+              )}
             </Link>
             <Link href="/cart" className="p-2 hover:bg-gray-50 rounded-lg transition-colors relative" aria-label="Cart">
               <FiShoppingCart className="w-5 h-5 text-gray-600" />
-              <span className="absolute -top-1 -right-1 bg-accent-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
-                0
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-accent-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </div>
         </div>
