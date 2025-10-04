@@ -95,9 +95,120 @@ function ProductDetailClient({ productId }: { productId: string }) {
 
         {/* Main 3-Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* LEFT COLUMN - Product Info */}
-          <div className="lg:col-span-4 order-2 lg:order-1">
-            <div className="bg-white rounded-xl p-6 shadow-md sticky top-24">
+          {/* LEFT COLUMN - Description & Features */}
+          <div className="lg:col-span-4 order-3 lg:order-1">
+            <div className="bg-white rounded-xl p-6 shadow-md space-y-6">
+              {/* Description */}
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 mb-3">Description</h2>
+                <p className="text-gray-600 leading-relaxed">{product.description}</p>
+              </div>
+
+              {/* Features */}
+              <div className="pt-6 border-t">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Features</h2>
+                <ul className="space-y-2">
+                  {product.features.map((feature, index) => (
+                    <li key={index} className="flex items-start space-x-3">
+                      <FiCheck className="w-5 h-5 text-success-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-600">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Share Buttons */}
+              <div className="pt-6 border-t">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                  <FiShare2 className="w-5 h-5" />
+                  <span>Share This Product</span>
+                </h2>
+                <div className="flex flex-col space-y-3">
+                  <button
+                    onClick={() => handleShare('whatsapp')}
+                    className="flex items-center justify-center space-x-3 bg-success-500 text-white py-3 px-6 rounded-lg hover:bg-success-600 transition-all font-medium shadow-md hover:shadow-lg"
+                  >
+                    <FaWhatsapp className="w-5 h-5" />
+                    <span>Share on WhatsApp</span>
+                  </button>
+                  <button
+                    onClick={() => handleShare('copy')}
+                    className="flex items-center justify-center space-x-3 bg-gray-100 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-200 transition-all font-medium border-2 border-gray-200"
+                  >
+                    <FiShare2 className="w-5 h-5" />
+                    <span>Copy Product Link</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Product Info */}
+              <div className="pt-6 border-t">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Product Information</h2>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between py-2 border-b border-gray-100">
+                    <span className="text-gray-600">SKU:</span>
+                    <span className="font-semibold text-gray-900">FC-{productId.toUpperCase()}</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-gray-100">
+                    <span className="text-gray-600">Category:</span>
+                    <span className="font-semibold text-gray-900">{product.category}</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-gray-100">
+                    <span className="text-gray-600">Availability:</span>
+                    <span className="font-semibold text-success-600">In Stock</span>
+                  </div>
+                  <div className="flex justify-between py-2">
+                    <span className="text-gray-600">Shipping:</span>
+                    <span className="font-semibold text-gray-900">Nationwide</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* MIDDLE COLUMN - Product Images (STICKY) */}
+          <div className="lg:col-span-4 order-1 lg:order-2">
+            <div className="bg-white rounded-xl p-4 shadow-md sticky top-24">
+              {/* Main Image */}
+              <div className="relative h-96 bg-gray-100 rounded-lg overflow-hidden mb-4">
+                <div className="w-full h-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300">
+                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                    <path d="M3 9h18"></path>
+                    <path d="M9 21V9"></path>
+                  </svg>
+                </div>
+                {product.oldPrice && (
+                  <div className="absolute top-4 right-4 bg-accent-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg">
+                    SALE
+                  </div>
+                )}
+              </div>
+
+              {/* Thumbnail Images */}
+              <div className="grid grid-cols-4 gap-2">
+                {[0, 1, 2, 3].map((index) => (
+                  <button
+                    key={index}
+                    onClick={() => setMainImage(index)}
+                    className={`relative h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all ${
+                      mainImage === index ? 'border-primary-600' : 'border-gray-200 hover:border-primary-300'
+                    }`}
+                  >
+                    <div className="w-full h-full flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gray-300">
+                        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                      </svg>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN - Product Info */}
+          <div className="lg:col-span-4 order-2 lg:order-3">
+            <div className="bg-white rounded-xl p-6 shadow-md">
               {/* Category Badge */}
               <span className="inline-block text-xs font-semibold text-primary-600 bg-primary-50 px-3 py-1 rounded-md uppercase mb-3">
                 {product.category}
@@ -231,117 +342,6 @@ function ProductDetailClient({ productId }: { productId: string }) {
                 <div className="flex items-center space-x-3 text-sm text-gray-600">
                   <FiCheck className="w-5 h-5 text-primary-600" />
                   <span>Secure checkout guaranteed</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* MIDDLE COLUMN - Product Images */}
-          <div className="lg:col-span-4 order-1 lg:order-2">
-            <div className="bg-white rounded-xl p-4 shadow-md">
-              {/* Main Image */}
-              <div className="relative h-96 bg-gray-100 rounded-lg overflow-hidden mb-4">
-                <div className="w-full h-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300">
-                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                    <path d="M3 9h18"></path>
-                    <path d="M9 21V9"></path>
-                  </svg>
-                </div>
-                {product.oldPrice && (
-                  <div className="absolute top-4 right-4 bg-accent-500 text-white px-4 py-2 rounded-lg font-bold shadow-lg">
-                    SALE
-                  </div>
-                )}
-              </div>
-
-              {/* Thumbnail Images */}
-              <div className="grid grid-cols-4 gap-2">
-                {[0, 1, 2, 3].map((index) => (
-                  <button
-                    key={index}
-                    onClick={() => setMainImage(index)}
-                    className={`relative h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all ${
-                      mainImage === index ? 'border-primary-600' : 'border-gray-200 hover:border-primary-300'
-                    }`}
-                  >
-                    <div className="w-full h-full flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gray-300">
-                        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                      </svg>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN - Description & Share */}
-          <div className="lg:col-span-4 order-3">
-            <div className="bg-white rounded-xl p-6 shadow-md space-y-6">
-              {/* Description */}
-              <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Description</h2>
-                <p className="text-gray-600 leading-relaxed">{product.description}</p>
-              </div>
-
-              {/* Features */}
-              <div className="pt-6 border-t">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Features</h2>
-                <ul className="space-y-2">
-                  {product.features.map((feature, index) => (
-                    <li key={index} className="flex items-start space-x-3">
-                      <FiCheck className="w-5 h-5 text-success-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Share Buttons */}
-              <div className="pt-6 border-t">
-                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                  <FiShare2 className="w-5 h-5" />
-                  <span>Share This Product</span>
-                </h2>
-                <div className="flex flex-col space-y-3">
-                  <button
-                    onClick={() => handleShare('whatsapp')}
-                    className="flex items-center justify-center space-x-3 bg-success-500 text-white py-3 px-6 rounded-lg hover:bg-success-600 transition-all font-medium shadow-md hover:shadow-lg"
-                  >
-                    <FaWhatsapp className="w-5 h-5" />
-                    <span>Share on WhatsApp</span>
-                  </button>
-                  <button
-                    onClick={() => handleShare('copy')}
-                    className="flex items-center justify-center space-x-3 bg-gray-100 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-200 transition-all font-medium border-2 border-gray-200"
-                  >
-                    <FiShare2 className="w-5 h-5" />
-                    <span>Copy Product Link</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Product Info */}
-              <div className="pt-6 border-t">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Product Information</h2>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">SKU:</span>
-                    <span className="font-semibold text-gray-900">FC-{productId.toUpperCase()}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Category:</span>
-                    <span className="font-semibold text-gray-900">{product.category}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Availability:</span>
-                    <span className="font-semibold text-success-600">In Stock</span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="text-gray-600">Shipping:</span>
-                    <span className="font-semibold text-gray-900">Nationwide</span>
-                  </div>
                 </div>
               </div>
             </div>
