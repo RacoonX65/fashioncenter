@@ -127,53 +127,53 @@ function ProductDetailClient({ productId }: { productId: string }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* LEFT COLUMN - Description & Features */}
           <div className="lg:col-span-4 order-3 lg:order-1">
-            <div className="bg-white rounded-xl p-6 shadow-md space-y-6">
+            <div className="bg-white rounded-xl p-5 shadow-md space-y-5">
               {/* Description */}
               <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Description</h2>
-                <p className="text-gray-600 leading-relaxed">{product.description}</p>
+                <h2 className="text-base font-bold text-gray-900 mb-2">Description</h2>
+                <p className="text-sm text-gray-600 leading-relaxed">{product.description}</p>
               </div>
 
               {/* Features */}
-              <div className="pt-6 border-t">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Features</h2>
-                <ul className="space-y-2">
+              <div className="pt-4 border-t">
+                <h2 className="text-base font-bold text-gray-900 mb-3">Features</h2>
+                <ul className="space-y-1.5">
                   {product.features.map((feature, index) => (
-                    <li key={index} className="flex items-start space-x-3">
-                      <FiCheck className="w-5 h-5 text-success-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">{feature}</span>
+                    <li key={index} className="flex items-start space-x-2">
+                      <FiCheck className="w-4 h-4 text-success-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-600">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Share Buttons */}
-              <div className="pt-6 border-t">
-                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                  <FiShare2 className="w-5 h-5" />
+              <div className="pt-4 border-t">
+                <h2 className="text-base font-bold text-gray-900 mb-3 flex items-center space-x-2">
+                  <FiShare2 className="w-4 h-4" />
                   <span>Share This Product</span>
                 </h2>
-                <div className="flex flex-col space-y-3">
+                <div className="flex flex-col space-y-2">
                   <button
                     onClick={() => handleShare('whatsapp')}
-                    className="flex items-center justify-center space-x-3 bg-success-500 text-white py-3 px-6 rounded-lg hover:bg-success-600 transition-all font-medium shadow-md hover:shadow-lg"
+                    className="flex items-center justify-center space-x-2 bg-success-500 text-white py-2.5 px-4 rounded-lg hover:bg-success-600 transition-all text-sm font-medium shadow-sm"
                   >
-                    <FaWhatsapp className="w-5 h-5" />
+                    <FaWhatsapp className="w-4 h-4" />
                     <span>Share on WhatsApp</span>
                   </button>
                   <button
                     onClick={() => handleShare('copy')}
-                    className="flex items-center justify-center space-x-3 bg-gray-100 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-200 transition-all font-medium border-2 border-gray-200"
+                    className="flex items-center justify-center space-x-2 bg-gray-100 text-gray-700 py-2.5 px-4 rounded-lg hover:bg-gray-200 transition-all text-sm font-medium border border-gray-200"
                   >
-                    <FiShare2 className="w-5 h-5" />
+                    <FiShare2 className="w-4 h-4" />
                     <span>Copy Product Link</span>
                   </button>
                 </div>
               </div>
 
               {/* Product Info */}
-              <div className="pt-6 border-t">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Product Information</h2>
+              <div className="pt-4 border-t">
+                <h2 className="text-base font-bold text-gray-900 mb-3">Product Information</h2>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between py-2 border-b border-gray-100">
                     <span className="text-gray-600">SKU:</span>
@@ -198,9 +198,9 @@ function ProductDetailClient({ productId }: { productId: string }) {
 
           {/* MIDDLE COLUMN - Product Images (STICKY) */}
           <div className="lg:col-span-4 order-1 lg:order-2">
-            <div className="bg-white rounded-xl p-4 shadow-md sticky top-24">
+            <div className="bg-white rounded-xl p-3 shadow-md sticky top-24">
               {/* Main Image */}
-              <div className="relative h-96 bg-gray-100 rounded-lg overflow-hidden mb-4">
+              <div className="relative h-80 bg-gray-100 rounded-lg overflow-hidden mb-3">
                 <div className="w-full h-full flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300">
                     <rect width="18" height="18" x="3" y="3" rx="2"></rect>
@@ -216,17 +216,17 @@ function ProductDetailClient({ productId }: { productId: string }) {
               </div>
 
               {/* Thumbnail Images */}
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 gap-1.5">
                 {[0, 1, 2, 3].map((index) => (
                   <button
                     key={index}
                     onClick={() => setMainImage(index)}
-                    className={`relative h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all ${
+                    className={`relative h-16 bg-gray-100 rounded-md overflow-hidden border-2 transition-all ${
                       mainImage === index ? 'border-primary-600' : 'border-gray-200 hover:border-primary-300'
                     }`}
                   >
                     <div className="w-full h-full flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gray-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gray-300">
                         <rect width="18" height="18" x="3" y="3" rx="2"></rect>
                       </svg>
                     </div>
@@ -238,59 +238,59 @@ function ProductDetailClient({ productId }: { productId: string }) {
 
           {/* RIGHT COLUMN - Product Info */}
           <div className="lg:col-span-4 order-2 lg:order-3">
-            <div className="bg-white rounded-xl p-6 shadow-md">
+            <div className="bg-white rounded-xl p-5 shadow-md">
               {/* Category Badge */}
-              <span className="inline-block text-xs font-semibold text-primary-600 bg-primary-50 px-3 py-1 rounded-md uppercase mb-3">
+              <span className="inline-block text-xs font-semibold text-primary-600 bg-primary-50 px-2.5 py-1 rounded-md uppercase mb-2">
                 {product.category}
               </span>
 
               {/* Product Name */}
-              <h1 className="text-3xl font-bold text-gray-900 mb-3">{product.name}</h1>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">{product.name}</h1>
 
               {/* Rating & Reviews */}
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="flex items-center space-x-1">
+              <div className="flex items-center space-x-2 mb-3">
+                <div className="flex items-center space-x-0.5">
                   {[...Array(5)].map((_, i) => (
                     <FiStar
                       key={i}
-                      className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'fill-orange-400 text-orange-400' : 'text-gray-300'}`}
+                      className={`w-3.5 h-3.5 ${i < Math.floor(product.rating) ? 'fill-orange-400 text-orange-400' : 'text-gray-300'}`}
                     />
                   ))}
                 </div>
                 <span className="text-sm font-semibold text-gray-900">{product.rating}</span>
-                <span className="text-sm text-gray-500">({product.reviews} reviews)</span>
+                <span className="text-xs text-gray-500">({product.reviews} reviews)</span>
               </div>
 
               {/* Price */}
-              <div className="mb-6 pb-6 border-b">
-                <div className="flex items-center space-x-3">
+              <div className="mb-5 pb-5 border-b">
+                <div className="flex items-center space-x-2">
                   {product.oldPrice && (
-                    <span className="text-xl text-gray-400 line-through">R {product.oldPrice}</span>
+                    <span className="text-lg text-gray-400 line-through">R {product.oldPrice}</span>
                   )}
-                  <span className="text-4xl font-bold text-gray-900">R {product.price}</span>
+                  <span className="text-3xl font-bold text-gray-900">R {product.price}</span>
                   {product.oldPrice && (
-                    <span className="bg-accent-500 text-white text-sm px-3 py-1 rounded-full font-bold">
+                    <span className="bg-accent-500 text-white text-xs px-2.5 py-1 rounded-full font-bold">
                       {Math.round((1 - product.price / product.oldPrice) * 100)}% OFF
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-success-600 font-medium mt-2 flex items-center">
-                  <FiCheck className="mr-1" />
+                <p className="text-xs text-success-600 font-medium mt-1.5 flex items-center">
+                  <FiCheck className="mr-1 w-3.5 h-3.5" />
                   In Stock - Ready to Ship
                 </p>
               </div>
 
               {/* Size Selector */}
-              <div className="mb-6">
-                <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <div className="mb-4">
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
                   Size: <span className="text-primary-600">{selectedSize}</span>
                 </label>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {product.sizes.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 border-2 rounded-lg font-medium transition-all ${
+                      className={`px-3 py-1.5 border-2 rounded-md text-sm font-medium transition-all ${
                         selectedSize === size
                           ? 'border-primary-600 bg-primary-50 text-primary-600'
                           : 'border-gray-200 hover:border-primary-300'
@@ -303,18 +303,18 @@ function ProductDetailClient({ productId }: { productId: string }) {
               </div>
 
               {/* Color Selector */}
-              <div className="mb-6">
-                <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <div className="mb-4">
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
                   Color: <span className="text-primary-600">{selectedColor.name}</span>
                 </label>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   {product.colors.map((color) => (
                     <button
                       key={color.name}
                       onClick={() => setSelectedColor(color)}
-                      className={`w-10 h-10 rounded-full border-4 transition-all ${
+                      className={`w-8 h-8 rounded-full border-3 transition-all ${
                         selectedColor.name === color.name
-                          ? 'border-primary-600 scale-110'
+                          ? 'border-primary-600 scale-110 ring-2 ring-primary-200'
                           : 'border-gray-200 hover:border-primary-300'
                       }`}
                       style={{ backgroundColor: color.hex }}
@@ -325,19 +325,19 @@ function ProductDetailClient({ productId }: { productId: string }) {
               </div>
 
               {/* Quantity Selector */}
-              <div className="mb-6">
-                <label className="block text-sm font-semibold text-gray-900 mb-3">Quantity</label>
-                <div className="flex items-center space-x-4">
+              <div className="mb-5">
+                <label className="block text-sm font-semibold text-gray-900 mb-2">Quantity</label>
+                <div className="flex items-center space-x-3">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all font-bold"
+                    className="w-9 h-9 border-2 border-gray-200 rounded-md hover:border-primary-500 hover:bg-primary-50 transition-all font-bold text-sm"
                   >
                     -
                   </button>
-                  <span className="text-xl font-bold w-12 text-center">{quantity}</span>
+                  <span className="text-lg font-bold w-10 text-center">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all font-bold"
+                    className="w-9 h-9 border-2 border-gray-200 rounded-md hover:border-primary-500 hover:bg-primary-50 transition-all font-bold text-sm"
                   >
                     +
                   </button>
@@ -345,39 +345,39 @@ function ProductDetailClient({ productId }: { productId: string }) {
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <button
                   onClick={handleAddToCart}
-                  className="w-full bg-primary-600 text-white py-4 rounded-lg hover:bg-primary-700 transition-all font-bold text-lg shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                  className="w-full bg-primary-600 text-white py-3 rounded-lg hover:bg-primary-700 transition-all font-bold shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
                 >
-                  <FiShoppingCart className="w-5 h-5" />
+                  <FiShoppingCart className="w-4 h-4" />
                   <span>Add to Cart</span>
                 </button>
                 <button 
                   onClick={handleToggleWishlist}
-                  className={`w-full py-4 rounded-lg transition-all font-bold text-lg flex items-center justify-center space-x-2 ${
+                  className={`w-full py-3 rounded-lg transition-all font-bold flex items-center justify-center space-x-2 ${
                     isWishlisted
                       ? 'bg-secondary-500 text-white hover:bg-secondary-600 border-2 border-secondary-500'
                       : 'bg-white border-2 border-primary-600 text-primary-600 hover:bg-primary-50'
                   }`}
                 >
-                  <FiHeart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
-                  <span>{isWishlisted ? 'In Wishlist' : 'Add to Wishlist'}</span>
+                  <FiHeart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
+                  <span className="text-sm">{isWishlisted ? 'In Wishlist' : 'Add to Wishlist'}</span>
                 </button>
               </div>
 
               {/* Trust Badges */}
-              <div className="mt-6 pt-6 border-t space-y-3">
-                <div className="flex items-center space-x-3 text-sm text-gray-600">
-                  <FiTruck className="w-5 h-5 text-primary-600" />
+              <div className="mt-5 pt-5 border-t space-y-2">
+                <div className="flex items-center space-x-2 text-xs text-gray-600">
+                  <FiTruck className="w-4 h-4 text-primary-600 flex-shrink-0" />
                   <span>Free shipping on orders over R1000</span>
                 </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-600">
-                  <FiRotateCw className="w-5 h-5 text-primary-600" />
+                <div className="flex items-center space-x-2 text-xs text-gray-600">
+                  <FiRotateCw className="w-4 h-4 text-primary-600 flex-shrink-0" />
                   <span>30-day easy returns</span>
                 </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-600">
-                  <FiCheck className="w-5 h-5 text-primary-600" />
+                <div className="flex items-center space-x-2 text-xs text-gray-600">
+                  <FiCheck className="w-4 h-4 text-primary-600 flex-shrink-0" />
                   <span>Secure checkout guaranteed</span>
                 </div>
               </div>

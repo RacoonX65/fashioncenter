@@ -35,10 +35,11 @@ const Header: React.FC = () => {
       
       {/* Main header */}
       <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+        {/* Mobile Layout */}
+        <div className="flex md:hidden items-center justify-between">
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2 hover:bg-gray-50 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-50 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -49,13 +50,31 @@ const Header: React.FC = () => {
             )}
           </button>
 
-          {/* Logo - Clean text */}
-          <Link href="/" className="text-xl sm:text-2xl font-bold text-primary-600 hover:text-primary-700 transition-colors">
+          {/* Logo - Centered on Mobile */}
+          <Link href="/" className="absolute left-1/2 transform -translate-x-1/2 text-xl sm:text-2xl font-bold text-primary-600 hover:text-primary-700 transition-colors">
             FashionCenter
           </Link>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Actions - Mobile */}
+          <div className="flex items-center space-x-2">
+            <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors" aria-label="Search">
+              <FiSearch className="w-5 h-5 text-gray-600" />
+            </button>
+            <Link href="/cart" className="p-2 hover:bg-gray-50 rounded-lg transition-colors relative" aria-label="Cart">
+              <FiShoppingCart className="w-5 h-5 text-gray-600" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-accent-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+          </div>
+        </div>
+
+        {/* Desktop Layout - 3 Column Grid */}
+        <div className="hidden md:grid md:grid-cols-3 md:items-center md:gap-4">
+          {/* Left Column - Navigation */}
+          <nav className="flex items-center space-x-6 justify-start">
             <Link 
               href="/" 
               className={`font-medium transition-colors relative pb-1 ${
@@ -96,20 +115,27 @@ const Header: React.FC = () => {
             >
               Shop All
             </Link>
-            <Link href="/bulk-orders" className="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition-colors font-medium">
+          </nav>
+
+          {/* Center Column - Logo */}
+          <div className="flex justify-center">
+            <Link href="/" className="text-2xl lg:text-3xl font-bold text-primary-600 hover:text-primary-700 transition-colors">
+              FashionCenter
+            </Link>
+          </div>
+          
+          {/* Right Column - Bulk Orders + Actions */}
+          <div className="flex items-center space-x-4 justify-end">
+            <Link href="/bulk-orders" className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors font-medium text-sm">
               Bulk Orders
             </Link>
-          </nav>
-          
-          {/* Actions - Clean icons */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
             <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors" aria-label="Search">
               <FiSearch className="w-5 h-5 text-gray-600" />
             </button>
-            <Link href="/auth/signin" className="hidden sm:flex p-2 hover:bg-gray-50 rounded-lg transition-colors" aria-label="Account">
+            <Link href="/auth/signin" className="p-2 hover:bg-gray-50 rounded-lg transition-colors" aria-label="Account">
               <FiUser className="w-5 h-5 text-gray-600" />
             </Link>
-            <Link href="/wishlist" className="hidden sm:flex p-2 hover:bg-gray-50 rounded-lg transition-colors relative" aria-label="Wishlist">
+            <Link href="/wishlist" className="p-2 hover:bg-gray-50 rounded-lg transition-colors relative" aria-label="Wishlist">
               <FiHeart className="w-5 h-5 text-gray-600" />
               {wishlistCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-secondary-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
