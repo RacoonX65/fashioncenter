@@ -2,10 +2,22 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { FiSearch, FiUser, FiHeart, FiShoppingCart, FiMenu, FiX } from 'react-icons/fi';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category');
+
+  // Function to check if a nav item is active
+  const isActive = (path: string, categoryName?: string) => {
+    if (categoryName) {
+      return pathname === '/products' && category === categoryName;
+    }
+    return pathname === path;
+  };
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -38,10 +50,46 @@ const Header: React.FC = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Home</Link>
-            <Link href="/products?category=men" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Men</Link>
-            <Link href="/products?category=women" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Women</Link>
-            <Link href="/products" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Shop All</Link>
+            <Link 
+              href="/" 
+              className={`font-medium transition-colors relative pb-1 ${
+                isActive('/') 
+                  ? 'text-primary-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600' 
+                  : 'text-gray-700 hover:text-primary-600'
+              }`}
+            >
+              Home
+            </Link>
+            <Link 
+              href="/products?category=men" 
+              className={`font-medium transition-colors relative pb-1 ${
+                isActive('/products', 'men') 
+                  ? 'text-primary-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600' 
+                  : 'text-gray-700 hover:text-primary-600'
+              }`}
+            >
+              Men
+            </Link>
+            <Link 
+              href="/products?category=women" 
+              className={`font-medium transition-colors relative pb-1 ${
+                isActive('/products', 'women') 
+                  ? 'text-primary-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600' 
+                  : 'text-gray-700 hover:text-primary-600'
+              }`}
+            >
+              Women
+            </Link>
+            <Link 
+              href="/products" 
+              className={`font-medium transition-colors relative pb-1 ${
+                pathname === '/products' && !category
+                  ? 'text-primary-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600' 
+                  : 'text-gray-700 hover:text-primary-600'
+              }`}
+            >
+              Shop All
+            </Link>
             <Link href="/bulk-orders" className="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition-colors font-medium">
               Bulk Orders
             </Link>
@@ -76,7 +124,11 @@ const Header: React.FC = () => {
               <li>
                 <Link 
                   href="/" 
-                  className="block py-3 px-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors font-medium"
+                  className={`block py-3 px-4 rounded-lg transition-colors font-medium ${
+                    isActive('/') 
+                      ? 'bg-primary-600 text-white' 
+                      : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Home
@@ -85,7 +137,11 @@ const Header: React.FC = () => {
               <li>
                 <Link 
                   href="/products?category=men" 
-                  className="block py-3 px-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors font-medium"
+                  className={`block py-3 px-4 rounded-lg transition-colors font-medium ${
+                    isActive('/products', 'men') 
+                      ? 'bg-primary-600 text-white' 
+                      : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Men's Fashion
@@ -94,7 +150,11 @@ const Header: React.FC = () => {
               <li>
                 <Link 
                   href="/products?category=women" 
-                  className="block py-3 px-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors font-medium"
+                  className={`block py-3 px-4 rounded-lg transition-colors font-medium ${
+                    isActive('/products', 'women') 
+                      ? 'bg-primary-600 text-white' 
+                      : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Women's Fashion
@@ -103,7 +163,11 @@ const Header: React.FC = () => {
               <li>
                 <Link 
                   href="/products" 
-                  className="block py-3 px-4 text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors font-medium"
+                  className={`block py-3 px-4 rounded-lg transition-colors font-medium ${
+                    pathname === '/products' && !category
+                      ? 'bg-primary-600 text-white' 
+                      : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Shop All
