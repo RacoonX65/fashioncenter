@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, use } from 'react';
 import Link from 'next/link';
 import { FiFilter, FiGrid, FiX } from 'react-icons/fi';
 
@@ -18,10 +18,11 @@ const allProducts = Array(16).fill(0).map((_, index) => ({
 export default function ProductsPage({
   searchParams,
 }: {
-  searchParams: { category?: string }
+  searchParams: Promise<{ category?: string }>
 }) {
   const [showFilters, setShowFilters] = useState(false);
-  const category = searchParams.category || 'all';
+  const params = use(searchParams);
+  const category = params.category || 'all';
   
   const filteredProducts = category !== 'all' ? 
     allProducts.filter(product => product.category === category) : 

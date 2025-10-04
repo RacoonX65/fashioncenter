@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const category = searchParams.get('category');
+  const category = searchParams?.get('category') || null;
 
   // Function to check if a nav item is active
   const isActive = (path: string, categoryName?: string) => {
