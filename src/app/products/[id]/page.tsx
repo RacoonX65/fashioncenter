@@ -95,6 +95,17 @@ function ProductDetailClient({ productId }: { productId: string }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Custom CSS for scrollbar hide */}
+      <style jsx>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="text-sm mb-6" aria-label="Breadcrumb">
@@ -312,10 +323,10 @@ function ProductDetailClient({ productId }: { productId: string }) {
                     <button
                       key={color.name}
                       onClick={() => setSelectedColor(color)}
-                      className={`w-8 h-8 rounded-full border-3 transition-all ${
+                      className={`w-8 h-8 rounded-full transition-all ${
                         selectedColor.name === color.name
-                          ? 'border-primary-600 scale-110 ring-2 ring-primary-200'
-                          : 'border-gray-200 hover:border-primary-300'
+                          ? 'ring-2 ring-primary-600 ring-offset-2 scale-110'
+                          : 'ring-1 ring-gray-300 hover:ring-primary-400 hover:ring-2'
                       }`}
                       style={{ backgroundColor: color.hex }}
                       title={color.name}
@@ -385,29 +396,121 @@ function ProductDetailClient({ productId }: { productId: string }) {
           </div>
         </div>
 
+        {/* Customer Reviews Slider */}
+        {product.reviews > 0 && (
+          <div className="mt-8 bg-white rounded-xl p-5 shadow-md">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-bold text-gray-900">Customer Reviews ({product.reviews})</h2>
+              <div className="flex items-center space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <FiStar
+                    key={i}
+                    className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'fill-orange-400 text-orange-400' : 'text-gray-300'}`}
+                  />
+                ))}
+                <span className="ml-2 text-sm font-semibold text-gray-900">{product.rating}</span>
+              </div>
+            </div>
+
+            {/* Reviews Slider */}
+            <div className="relative overflow-hidden">
+              <div className="flex space-x-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2">
+                {/* Sample Reviews - Replace with real data */}
+                {[
+                  {
+                    id: 1,
+                    author: 'Sarah M.',
+                    rating: 5,
+                    date: '2 days ago',
+                    comment: 'Absolutely love this! The quality is amazing and fits perfectly. Highly recommend!',
+                    verified: true
+                  },
+                  {
+                    id: 2,
+                    author: 'John D.',
+                    rating: 4,
+                    date: '1 week ago',
+                    comment: 'Great product! Fast delivery and exactly as described. Will order again.',
+                    verified: true
+                  },
+                  {
+                    id: 3,
+                    author: 'Thabo K.',
+                    rating: 5,
+                    date: '2 weeks ago',
+                    comment: 'Excellent quality and great value for money. Very happy with my purchase!',
+                    verified: true
+                  },
+                  {
+                    id: 4,
+                    author: 'Lerato N.',
+                    rating: 5,
+                    date: '3 weeks ago',
+                    comment: 'Beautiful product! The colors are vibrant and the material is top quality.',
+                    verified: true
+                  }
+                ].map((review) => (
+                  <div
+                    key={review.id}
+                    className="flex-none w-64 sm:w-72 bg-gray-50 rounded-lg p-4 snap-start"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center space-x-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <FiStar
+                            key={i}
+                            className={`w-3.5 h-3.5 ${i < review.rating ? 'fill-orange-400 text-orange-400' : 'text-gray-300'}`}
+                          />
+                        ))}
+                      </div>
+                      {review.verified && (
+                        <span className="text-xs bg-success-100 text-success-700 px-2 py-0.5 rounded-full font-medium">
+                          ✓ Verified
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm text-gray-700 mb-3 line-clamp-3">{review.comment}</p>
+                    <div className="flex items-center justify-between text-xs text-gray-500">
+                      <span className="font-semibold text-gray-900">{review.author}</span>
+                      <span>{review.date}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* View All Reviews Link */}
+            <div className="text-center mt-3">
+              <button className="text-sm text-primary-600 hover:text-primary-700 font-semibold hover:underline">
+                View All {product.reviews} Reviews →
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Related Products */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">You May Also Like</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-8 mb-8">
+          <h2 className="text-lg font-bold text-gray-900 mb-4">You May Also Like</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[1, 2, 3, 4].map((item) => (
               <Link
                 key={item}
                 href={`/products/related-${item}`}
-                className="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100 bg-white"
+                className="group rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100 bg-white"
               >
-                <div className="relative h-64 bg-gray-100">
+                <div className="relative h-36 sm:h-44 bg-gray-100">
                   <div className="w-full h-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gray-300">
                       <rect width="18" height="18" x="3" y="3" rx="2"></rect>
                     </svg>
                   </div>
                 </div>
-                <div className="p-4">
-                  <span className="text-xs font-semibold text-primary-600 bg-primary-50 px-2 py-1 rounded-md">
+                <div className="p-2.5 sm:p-3">
+                  <span className="text-xs font-semibold text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded">
                     {product.category}
                   </span>
-                  <h3 className="font-bold mt-2 text-gray-900">Related Product {item}</h3>
-                  <p className="text-xl font-bold text-gray-900 mt-2">R 299.99</p>
+                  <h3 className="font-semibold text-xs sm:text-sm mt-1.5 text-gray-900 line-clamp-1">Related Product {item}</h3>
+                  <p className="text-sm sm:text-base font-bold text-gray-900 mt-1">R 299.99</p>
                 </div>
               </Link>
             ))}
