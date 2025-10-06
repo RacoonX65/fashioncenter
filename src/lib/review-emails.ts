@@ -29,11 +29,11 @@ export async function sendReviewRequestEmail(data: ReviewRequestData) {
   try {
     const sendSmtpEmail = new brevo.SendSmtpEmail();
     
-    sendSmtpEmail.subject = `How was your FashionCenter order? Share your review! ⭐`;
+    sendSmtpEmail.subject = `How was your ApparelCast order? Share your review! ⭐`;
     sendSmtpEmail.to = [{ email: data.customerEmail, name: data.customerName }];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      name: 'ApparelCast',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -59,7 +59,7 @@ export async function sendReviewRequestEmail(data: ReviewRequestData) {
             </div>
             <div class="content">
               <p>Hi ${data.customerName},</p>
-              <p>Thank you for your recent order from FashionCenter! We hope you're loving your new items. 💙</p>
+              <p>Thank you for your recent order from ApparelCast! We hope you're loving your new items. 💙</p>
               
               <p><strong>Your opinion matters!</strong> Help other shoppers by sharing your experience with the products you purchased.</p>
               
@@ -68,7 +68,7 @@ export async function sendReviewRequestEmail(data: ReviewRequestData) {
                   <h3>${product.name}</h3>
                   <p>How would you rate this product?</p>
                   <div class="stars">⭐⭐⭐⭐⭐</div>
-                  <a href="https://fashioncenter.co.za/orders/${data.orderNumber}/review?product=${product.id}" class="button">Leave a Review</a>
+                  <a href="https://apparelcast.shop/orders/${data.orderNumber}/review?product=${product.id}" class="button">Leave a Review</a>
                 </div>
               `).join('')}
               
@@ -76,11 +76,11 @@ export async function sendReviewRequestEmail(data: ReviewRequestData) {
               
               <p><strong>As a thank you</strong>, we'll send you a special discount code once you submit your review!</p>
               
-              <p>Thank you for being a valued FashionCenter customer!</p>
+              <p>Thank you for being a valued ApparelCast customer!</p>
             </div>
             <div class="footer">
-              <p>© ${new Date().getFullYear()} FashionCenter. All rights reserved.</p>
-              <p>If you have any questions, contact us at info@fashioncenter.co.za</p>
+              <p>© ${new Date().getFullYear()} ApparelCast. All rights reserved.</p>
+              <p>If you have any questions, contact us at info@apparelcast.shop</p>
             </div>
           </div>
         </body>
@@ -102,11 +102,11 @@ export async function sendReviewReminderEmail(data: ReviewRequestData) {
   try {
     const sendSmtpEmail = new brevo.SendSmtpEmail();
     
-    sendSmtpEmail.subject = `Quick reminder: Share your FashionCenter review 💙`;
+    sendSmtpEmail.subject = `Quick reminder: Share your ApparelCast review 💙`;
     sendSmtpEmail.to = [{ email: data.customerEmail, name: data.customerName }];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      name: 'ApparelCast',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -129,20 +129,20 @@ export async function sendReviewReminderEmail(data: ReviewRequestData) {
             </div>
             <div class="content">
               <p>Hi ${data.customerName},</p>
-              <p>We noticed you haven't left a review for your recent FashionCenter purchase yet.</p>
+              <p>We noticed you haven't left a review for your recent ApparelCast purchase yet.</p>
               
               <p>Your feedback is incredibly valuable to us and helps other customers make better shopping decisions.</p>
               
               <p>It only takes 2 minutes! ⏱️</p>
               
-              <a href="https://fashioncenter.co.za/orders/${data.orderNumber}/review" class="button">Leave Your Review Now</a>
+              <a href="https://apparelcast.shop/orders/${data.orderNumber}/review" class="button">Leave Your Review Now</a>
               
               <p style="margin-top: 20px;"><strong>🎁 Bonus:</strong> Get a 10% discount code after submitting your review!</p>
               
-              <p>Thank you for shopping with FashionCenter! 💙</p>
+              <p>Thank you for shopping with ApparelCast! 💙</p>
             </div>
             <div class="footer">
-              <p>© ${new Date().getFullYear()} FashionCenter</p>
+              <p>© ${new Date().getFullYear()} ApparelCast</p>
             </div>
           </div>
         </body>
@@ -164,11 +164,11 @@ export async function sendAdminReviewRequest(data: ReviewRequestData) {
   try {
     const sendSmtpEmail = new brevo.SendSmtpEmail();
     
-    sendSmtpEmail.subject = `We'd love to hear about your FashionCenter experience!`;
+    sendSmtpEmail.subject = `We'd love to hear about your ApparelCast experience!`;
     sendSmtpEmail.to = [{ email: data.customerEmail, name: data.customerName }];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      name: 'ApparelCast',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -190,7 +190,7 @@ export async function sendAdminReviewRequest(data: ReviewRequestData) {
             </div>
             <div class="content">
               <p>Hi ${data.customerName},</p>
-              <p>We hope you're enjoying your purchase from FashionCenter!</p>
+              <p>We hope you're enjoying your purchase from ApparelCast!</p>
               
               <p>As a valued customer, we'd really appreciate it if you could take a moment to share your thoughts about the products you ordered.</p>
               
@@ -201,9 +201,9 @@ export async function sendAdminReviewRequest(data: ReviewRequestData) {
                 <li>🎁 Get a special discount code as a thank you!</li>
               </ul>
               
-              <a href="https://fashioncenter.co.za/orders/${data.orderNumber}/review" class="button">Share Your Review</a>
+              <a href="https://apparelcast.shop/orders/${data.orderNumber}/review" class="button">Share Your Review</a>
               
-              <p>Thank you for being part of the FashionCenter family! 🙏</p>
+              <p>Thank you for being part of the ApparelCast family! 🙏</p>
             </div>
           </div>
         </body>

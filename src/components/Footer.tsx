@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FiInstagram, FiFacebook, FiTwitter, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 
 const Footer: React.FC = () => {
@@ -61,45 +62,58 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-bold text-lg mb-4 text-white">Contact Us</h3>
             <address className="not-italic text-gray-300 space-y-3">
-              <p className="flex items-center">
-                <FiMail className="mr-3 text-primary-400" />
-                info@fashioncenter.co.za
+              <p className="flex items-start">
+                <FiMail className="mr-3 text-accent-400 mt-0.5 flex-shrink-0" />
+                <span>
+                  <a href="mailto:info@apparelcast.shop" className="hover:text-accent-400 transition-colors">
+                    info@apparelcast.shop
+                  </a>
+                  <br />
+                  <a href="mailto:orders@apparelcast.shop" className="text-sm text-gray-400 hover:text-accent-400 transition-colors">
+                    orders@apparelcast.shop
+                  </a>
+                </span>
               </p>
               <p className="flex items-center">
-                <FiPhone className="mr-3 text-primary-400" />
-                +27 (0) 12 345 6789
+                <FiPhone className="mr-3 text-accent-400 flex-shrink-0" />
+                <a href="tel:+27123456789" className="hover:text-accent-400 transition-colors">
+                  +27 (0) 12 345 6789
+                </a>
               </p>
-              <p className="flex items-center">
-                <FiMapPin className="mr-3 text-primary-400" />
-                Johannesburg, South Africa
+              <p className="flex items-start">
+                <FiMapPin className="mr-3 text-accent-400 mt-0.5 flex-shrink-0" />
+                <span>
+                  Johannesburg, Gauteng<br />
+                  South Africa
+                </span>
               </p>
               <div className="pt-4">
-                <p className="font-semibold mb-3">Follow Us:</p>
+                <p className="font-semibold mb-3 text-white">Follow Us:</p>
                 <div className="flex space-x-3">
                   <a 
-                    href="https://instagram.com" 
+                    href="https://instagram.com/apparelcast" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     aria-label="Instagram" 
-                    className="bg-primary-600 p-3 rounded-lg hover:bg-primary-700 transition-all"
+                    className="bg-primary-700 p-2.5 rounded-sm hover:bg-accent-600 transition-all"
                   >
                     <FiInstagram className="w-5 h-5 text-white" />
                   </a>
                   <a 
-                    href="https://facebook.com" 
+                    href="https://facebook.com/apparelcast" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     aria-label="Facebook" 
-                    className="bg-primary-600 p-3 rounded-lg hover:bg-primary-700 transition-all"
+                    className="bg-primary-700 p-2.5 rounded-sm hover:bg-accent-600 transition-all"
                   >
                     <FiFacebook className="w-5 h-5 text-white" />
                   </a>
                   <a 
-                    href="https://twitter.com" 
+                    href="https://twitter.com/apparelcast" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    aria-label="Twitter" 
-                    className="bg-primary-600 p-3 rounded-lg hover:bg-primary-700 transition-all"
+                    aria-label="Twitter/X" 
+                    className="bg-primary-700 p-2.5 rounded-sm hover:bg-accent-600 transition-all"
                   >
                     <FiTwitter className="w-5 h-5 text-white" />
                   </a>
@@ -113,21 +127,31 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 pt-6 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div>
-              <Link href="/" className="text-2xl font-bold text-primary-500 hover:text-primary-400 transition-colors">
-                FashionCenter
+              <Link href="/" className="inline-flex flex-col items-start leading-none hover:opacity-80 transition-opacity mb-4">
+                <span className="text-4xl md:text-5xl font-bold text-white tracking-tight" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 900 }}>
+                  Apparel.
+                </span>
+                <span className="text-[11px] md:text-[12px] font-medium text-gray-400 tracking-[0.35em] mt-1">
+                  CAST   EST 2025
+                </span>
               </Link>
-              <p className="text-gray-400 text-sm mt-2">© {new Date().getFullYear()} All rights reserved.</p>
+              <p className="text-gray-400 text-sm mt-4">
+                © {new Date().getFullYear()} ApparelCast. All rights reserved.
+              </p>
+              <p className="text-gray-500 text-xs mt-1">
+                Quality fashion delivered across South Africa
+              </p>
             </div>
             <div className="flex flex-wrap items-center gap-4">
               <span className="text-gray-400 text-sm">Secure Payments:</span>
               <div className="flex items-center space-x-2">
-                <div className="bg-gray-800 text-white text-xs px-3 py-2 rounded font-semibold border border-gray-700">
+                <div className="bg-gray-800 text-white text-xs px-3 py-1.5 rounded-sm font-semibold border border-gray-700">
                   PayStack
                 </div>
-                <div className="bg-gray-800 text-white text-xs px-3 py-2 rounded font-semibold border border-gray-700">
+                <div className="bg-gray-800 text-white text-xs px-3 py-1.5 rounded-sm font-semibold border border-gray-700">
                   Visa
                 </div>
-                <div className="bg-gray-800 text-white text-xs px-3 py-2 rounded font-semibold border border-gray-700">
+                <div className="bg-gray-800 text-white text-xs px-3 py-1.5 rounded-sm font-semibold border border-gray-700">
                   Mastercard
                 </div>
               </div>

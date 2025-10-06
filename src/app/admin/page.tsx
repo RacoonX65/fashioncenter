@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FiPackage, FiShoppingBag, FiUsers, FiBarChart2, FiSettings, FiPlus, FiEdit, FiTrash2, FiStar, FiTag, FiSpeaker, FiBriefcase, FiTruck, FiDollarSign, FiTrendingUp, FiSearch, FiFilter, FiDownload, FiEye } from 'react-icons/fi';
+import { FiPackage, FiShoppingBag, FiUsers, FiBarChart2, FiSettings, FiPlus, FiEdit, FiTrash2, FiStar, FiTag, FiSpeaker, FiBriefcase, FiTruck, FiDollarSign, FiTrendingUp, FiSearch, FiFilter, FiDownload, FiEye, FiImage } from 'react-icons/fi';
 import { supabase } from '@/lib/supabase';
 import toast from 'react-hot-toast';
 
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
         {/* Sidebar */}
         <div className="w-64 bg-primary-900 text-white min-h-screen fixed left-0 top-0">
           <div className="p-6 border-b border-primary-800">
-            <h2 className="text-2xl font-bold">FashionCenter</h2>
+            <h2 className="text-2xl font-bold">ApparelCast</h2>
             <p className="text-primary-300 text-sm">Admin Dashboard</p>
           </div>
           
@@ -265,6 +265,14 @@ export default function AdminDashboard() {
                 >
                   <FiSpeaker className="h-5 w-5" />
                   <span>Campaigns</span>
+                </Link>
+                
+                <Link
+                  href="/admin/banners"
+                  className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition-colors"
+                >
+                  <FiImage className="h-5 w-5" />
+                  <span>Banners</span>
                 </Link>
                 
                 <Link

@@ -38,7 +38,7 @@ export async function createReferralLink(customerEmail: string, customerId?: str
   }
 
   // Generate referral link
-  const referralLink = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://fashioncenter.co.za'}/ref/${referralCode}`;
+  const referralLink = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://apparelcast.shop'}/ref/${referralCode}`;
 
   return {
     referralCode,
@@ -147,7 +147,7 @@ async function sendRefereeWelcomeEmail(
     sendSmtpEmail.to = [{ email: refereeEmail }];
     sendSmtpEmail.sender = {
       name: 'FashionCenter',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -184,7 +184,7 @@ async function sendRefereeWelcomeEmail(
               </div>
               
               <p style="text-align: center;">
-                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://fashioncenter.co.za'}/products" class="button">
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://apparelcast.shop'}/products" class="button">
                   Start Shopping Now! 🛍️
                 </a>
               </p>
@@ -224,7 +224,7 @@ async function sendReferrerRewardEmail(referrerEmail: string, discountCode: stri
     sendSmtpEmail.to = [{ email: referrerEmail }];
     sendSmtpEmail.sender = {
       name: 'FashionCenter',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -260,7 +260,7 @@ async function sendReferrerRewardEmail(referrerEmail: string, discountCode: stri
               </div>
               
               <p style="text-align: center;">
-                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://fashioncenter.co.za'}/products" class="button">
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://apparelcast.shop'}/products" class="button">
                   Treat Yourself! 🛍️
                 </a>
               </p>
@@ -269,7 +269,7 @@ async function sendReferrerRewardEmail(referrerEmail: string, discountCode: stri
               <p>Every friend you refer gets 15% off, and you get 10% off! There's no limit to how many people you can refer. 💰</p>
               
               <p style="text-align: center; margin-top: 30px;">
-                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://fashioncenter.co.za'}/account/referrals" style="color: #5680a5; text-decoration: none;">
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://apparelcast.shop'}/account/referrals" style="color: #5680a5; text-decoration: none;">
                   View Your Referral Dashboard →
                 </a>
               </p>

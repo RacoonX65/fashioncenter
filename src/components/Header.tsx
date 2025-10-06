@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FiSearch, FiUser, FiHeart, FiShoppingCart, FiMenu, FiX } from 'react-icons/fi';
 import { useCart } from '@/hooks/useCart';
@@ -28,13 +29,13 @@ const Header: React.FC = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       {/* Top announcement bar - Clean solid color */}
-      <div className="bg-primary-600 text-white text-center py-2.5 text-xs sm:text-sm px-4 font-medium">
-        <span className="hidden sm:inline">Free Shipping on Orders Over R1000 | Same Day Delivery in Johannesburg</span>
-        <span className="sm:hidden">Free Shipping Over R1000</span>
+      <div className="bg-primary-800 text-white text-center py-2.5 text-xs sm:text-sm px-4 font-medium">
+        <span className="hidden sm:inline">✨ Free Shipping on Orders Over R1000 | Same Day Delivery in Johannesburg | Contact: info@apparelcast.shop</span>
+        <span className="sm:hidden">✨ Free Shipping Over R1000</span>
       </div>
       
       {/* Main header */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-3">
         {/* Mobile Layout */}
         <div className="flex md:hidden items-center justify-between">
           {/* Mobile Menu Button */}
@@ -51,8 +52,13 @@ const Header: React.FC = () => {
           </button>
 
           {/* Logo - Centered on Mobile */}
-          <Link href="/" className="absolute left-1/2 transform -translate-x-1/2 text-xl sm:text-2xl font-bold text-primary-600 hover:text-primary-700 transition-colors">
-            FashionCenter
+          <Link href="/" className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center leading-none">
+            <span className="text-xl sm:text-2xl font-bold text-primary-900 tracking-tight" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 900 }}>
+              Apparel.
+            </span>
+            <span className="text-[8px] sm:text-[9px] font-medium text-primary-600 tracking-[0.35em] mt-0.5">
+              CAST   EST 2025
+            </span>
           </Link>
           
           {/* Actions - Mobile */}
@@ -119,8 +125,13 @@ const Header: React.FC = () => {
 
           {/* Center Column - Logo */}
           <div className="flex justify-center">
-            <Link href="/" className="text-2xl lg:text-3xl font-bold text-primary-600 hover:text-primary-700 transition-colors">
-              FashionCenter
+            <Link href="/" className="flex flex-col items-center leading-none hover:opacity-80 transition-opacity">
+              <span className="text-3xl lg:text-4xl font-bold text-primary-900 tracking-tight" style={{ fontFamily: 'var(--font-playfair), Georgia, serif', fontWeight: 900 }}>
+                Apparel.
+              </span>
+              <span className="text-[10px] font-medium text-primary-600 tracking-[0.35em] mt-0.5">
+                CAST   EST 2025
+              </span>
             </Link>
           </div>
           

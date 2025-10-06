@@ -139,8 +139,8 @@ async function sendNewProductEmail(
     sendSmtpEmail.subject = `🆕 New Product Alert: ${product.name} - ${customer.discount_percentage}% OFF!`;
     sendSmtpEmail.to = [{ email: customer.email, name: customer.contact_person }];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter Wholesale',
-      email: process.env.BREVO_SENDER_EMAIL || 'wholesale@fashioncenter.co.za'
+      name: 'ApparelCast Wholesale',
+      email: process.env.BREVO_SENDER_EMAIL || 'wholesale@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -217,7 +217,7 @@ async function sendNewProductEmail(
               ` : ''}
               
               <div style="text-align: center; margin: 35px 0;">
-                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://fashioncenter.co.za'}/wholesale/shop/${product.id}?code=${customer.wholesale_code}" class="button">
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://apparelcast.shop'}/wholesale/shop/${product.id}?code=${customer.wholesale_code}" class="button">
                   Order Now - ${customer.discount_percentage}% OFF 🛍️
                 </a>
               </div>
@@ -246,11 +246,11 @@ async function sendNewProductEmail(
               <p style="margin-top: 30px;">Questions about this product or need custom quantities? Reply to this email or contact our wholesale team!</p>
               
               <p><strong>Happy Selling!</strong><br>
-              FashionCenter Wholesale Team 💙</p>
+              ApparelCast Wholesale Team 💙</p>
             </div>
             
             <div class="footer">
-              <p style="margin: 0; color: #666; font-size: 12px;">© ${new Date().getFullYear()} FashionCenter Wholesale</p>
+              <p style="margin: 0; color: #666; font-size: 12px;">© ${new Date().getFullYear()} ApparelCast Wholesale</p>
               <p style="margin: 10px 0 0 0; color: #666; font-size: 12px;">
                 <a href="${process.env.NEXT_PUBLIC_SITE_URL}/wholesale/shop" style="color: #5680a5; text-decoration: none;">Browse All Products</a> | 
                 <a href="${process.env.NEXT_PUBLIC_SITE_URL}/wholesale/portal" style="color: #5680a5; text-decoration: none;">Your Portal</a>

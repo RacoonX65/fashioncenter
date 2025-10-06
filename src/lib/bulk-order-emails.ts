@@ -47,8 +47,8 @@ export async function sendWholesaleApprovalEmail(data: ApprovalEmailData) {
     sendSmtpEmail.subject = `🎉 Your Wholesale Application is Approved!`;
     sendSmtpEmail.to = [{ email: data.email, name: data.contactPerson }];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter Wholesale',
-      email: process.env.BREVO_SENDER_EMAIL || 'wholesale@fashioncenter.co.za'
+      name: 'ApparelCast Wholesale',
+      email: process.env.BREVO_SENDER_EMAIL || 'wholesale@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -117,14 +117,14 @@ export async function sendWholesaleApprovalEmail(data: ApprovalEmailData) {
               </ol>
               
               <p style="text-align: center; margin: 30px 0;">
-                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://fashioncenter.co.za'}/products" class="button">
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://apparelcast.shop'}/products" class="button">
                   Start Shopping Now! 🛍️
                 </a>
               </p>
               
               <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <p style="margin: 0;"><strong>💡 Pro Tip:</strong> Bookmark your wholesale portal to track orders and manage your account:</p>
-                <p style="margin: 10px 0 0 0;"><a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://fashioncenter.co.za'}/wholesale/portal" style="color: #856404;">View Your Wholesale Portal →</a></p>
+                <p style="margin: 10px 0 0 0;"><a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://apparelcast.shop'}/wholesale/portal" style="color: #856404;">View Your Wholesale Portal →</a></p>
               </div>
               
               <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-radius: 12px; padding: 25px; margin: 30px 0; text-align: center; color: white;">
@@ -158,20 +158,20 @@ export async function sendWholesaleApprovalEmail(data: ApprovalEmailData) {
               <h3 style="color: #2c3d50; margin-top: 30px;">📞 Need Help?</h3>
               <p>Our wholesale team is here for you:</p>
               <ul style="list-style: none; padding: 0;">
-                <li>📧 Email: <a href="mailto:wholesale@fashioncenter.co.za" style="color: #5680a5;">wholesale@fashioncenter.co.za</a></li>
+                <li>📧 Email: <a href="mailto:wholesale@apparelcast.shop" style="color: #5680a5;">wholesale@apparelcast.shop</a></li>
                 <li>📱 WhatsApp: +27 (0) 12 345 6789</li>
                 <li>⏰ Support Hours: Mon-Fri, 8am-5pm SAST</li>
               </ul>
               
               <p style="margin-top: 30px;">We're excited to partner with you and help grow your business!</p>
               
-              <p><strong>Welcome to the FashionCenter Wholesale Family! 💙</strong></p>
+              <p><strong>Welcome to the ApparelCast Wholesale Family! 💙</strong></p>
               
               <p>Best regards,<br>
-              <strong>FashionCenter Wholesale Team</strong></p>
+              <strong>ApparelCast Wholesale Team</strong></p>
             </div>
             <div class="footer">
-              <p style="margin: 0; color: #666; font-size: 12px;">© ${new Date().getFullYear()} FashionCenter. All rights reserved.</p>
+              <p style="margin: 0; color: #666; font-size: 12px;">© ${new Date().getFullYear()} ApparelCast. All rights reserved.</p>
               <p style="margin: 10px 0 0 0; color: #666; font-size: 12px;">This is an automated email. Your wholesale code: <strong>${data.wholesaleCode}</strong></p>
             </div>
           </div>
@@ -198,8 +198,8 @@ export async function sendWholesaleRejectionEmail(data: RejectionEmailData) {
     sendSmtpEmail.subject = `Update on Your Wholesale Application`;
     sendSmtpEmail.to = [{ email: data.email, name: data.contactPerson }];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter Wholesale',
-      email: process.env.BREVO_SENDER_EMAIL || 'wholesale@fashioncenter.co.za'
+      name: 'ApparelCast Wholesale',
+      email: process.env.BREVO_SENDER_EMAIL || 'wholesale@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -223,7 +223,7 @@ export async function sendWholesaleRejectionEmail(data: RejectionEmailData) {
             <div class="content">
               <p>Hi ${data.contactPerson},</p>
               
-              <p>Thank you for your interest in the FashionCenter wholesale program.</p>
+              <p>Thank you for your interest in the ApparelCast wholesale program.</p>
               
               <p>After careful review, we're unable to approve your wholesale application for the <strong>${data.tierName}</strong> tier at this time.</p>
               
@@ -242,7 +242,7 @@ export async function sendWholesaleRejectionEmail(data: RejectionEmailData) {
               </ul>
               
               <p style="text-align: center; margin: 25px 0;">
-                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://fashioncenter.co.za'}/products" class="button">
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://apparelcast.shop'}/products" class="button">
                   Browse Our Collection
                 </a>
               </p>
@@ -254,16 +254,16 @@ export async function sendWholesaleRejectionEmail(data: RejectionEmailData) {
               <p style="margin-top: 25px;">If you have any questions or would like to discuss this decision, please don't hesitate to reach out.</p>
               
               <p><strong>Contact us:</strong><br>
-              📧 wholesale@fashioncenter.co.za<br>
+              📧 wholesale@apparelcast.shop<br>
               📱 WhatsApp: +27 (0) XX XXX XXXX</p>
               
               <p>Thank you for your understanding.</p>
               
               <p>Best regards,<br>
-              <strong>FashionCenter Wholesale Team</strong></p>
+              <strong>ApparelCast Wholesale Team</strong></p>
             </div>
             <div class="footer">
-              <p style="margin: 0; color: #666; font-size: 12px;">© ${new Date().getFullYear()} FashionCenter. All rights reserved.</p>
+              <p style="margin: 0; color: #666; font-size: 12px;">© ${new Date().getFullYear()} ApparelCast. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -289,8 +289,8 @@ export async function sendApplicationReceivedEmail(data: ApplicationReceivedEmai
     sendSmtpEmail.subject = `✅ Wholesale Application Received - ${data.businessName}`;
     sendSmtpEmail.to = [{ email: data.email, name: data.contactPerson }];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter Wholesale',
-      email: process.env.BREVO_SENDER_EMAIL || 'wholesale@fashioncenter.co.za'
+      name: 'ApparelCast Wholesale',
+      email: process.env.BREVO_SENDER_EMAIL || 'wholesale@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -313,7 +313,7 @@ export async function sendApplicationReceivedEmail(data: ApplicationReceivedEmai
             <div class="content">
               <p>Hi ${data.contactPerson},</p>
               
-              <p>Thank you for applying to the FashionCenter wholesale program!</p>
+              <p>Thank you for applying to the ApparelCast wholesale program!</p>
               
               <p>We've received your application for the <strong>${data.tierName}</strong> tier.</p>
               
@@ -328,13 +328,13 @@ export async function sendApplicationReceivedEmail(data: ApplicationReceivedEmai
                 <p style="margin: 0;"><strong>💡 Pro Tip:</strong> Check your spam/junk folder if you don't hear from us within 48 hours!</p>
               </div>
               
-              <p>Questions? Contact us at <a href="mailto:wholesale@fashioncenter.co.za">wholesale@fashioncenter.co.za</a></p>
+              <p>Questions? Contact us at <a href="mailto:wholesale@apparelcast.shop">wholesale@apparelcast.shop</a></p>
               
               <p>Best regards,<br>
-              <strong>FashionCenter Wholesale Team</strong></p>
+              <strong>ApparelCast Wholesale Team</strong></p>
             </div>
             <div class="footer">
-              <p style="margin: 0; color: #666; font-size: 12px;">© ${new Date().getFullYear()} FashionCenter</p>
+              <p style="margin: 0; color: #666; font-size: 12px;">© ${new Date().getFullYear()} ApparelCast</p>
             </div>
           </div>
         </body>

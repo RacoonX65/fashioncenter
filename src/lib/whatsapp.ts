@@ -1,5 +1,5 @@
 /**
- * WhatsApp Business API Integration for FashionCenter
+ * WhatsApp Business API Integration for ApparelCast
  * 
  * This module handles sending notifications to customers and admins via WhatsApp.
  * It requires setting up WhatsApp Business API access through Meta or a provider like Twilio.
@@ -110,7 +110,7 @@ Please log into the admin dashboard to process this order.
  */
 export async function sendOrderConfirmation(recipient: WhatsAppRecipient, orderDetails: OrderDetails) {
   const messageBody = `
-Thank you for your order with FashionCenter!
+Thank you for your order with ApparelCast!
 
 Order #${orderDetails.orderNumber} has been received and is being processed.
 
@@ -134,26 +134,26 @@ export async function sendOrderStatusUpdate(recipient: WhatsAppRecipient, tracki
   switch (trackingDetails.status) {
     case 'processing':
       messageBody = `
-Your FashionCenter order #${trackingDetails.orderNumber} is being processed.
+Your ApparelCast order #${trackingDetails.orderNumber} is being processed.
 We'll update you when it ships!
 `;
       break;
 
     case 'shipped':
       messageBody = `
-Great news! Your FashionCenter order #${trackingDetails.orderNumber} has been shipped.
+Great news! Your ApparelCast order #${trackingDetails.orderNumber} has been shipped.
 
 ${trackingDetails.courier ? `Courier: ${trackingDetails.courier}` : ''}
 ${trackingDetails.trackingNumber ? `Tracking Number: ${trackingDetails.trackingNumber}` : ''}
 ${trackingDetails.trackingUrl ? `Track your package: ${trackingDetails.trackingUrl}` : ''}
 
-Thank you for shopping with FashionCenter!
+Thank you for shopping with ApparelCast!
 `;
       break;
 
     case 'out_for_delivery':
       messageBody = `
-Your FashionCenter order #${trackingDetails.orderNumber} is out for delivery!
+Your ApparelCast order #${trackingDetails.orderNumber} is out for delivery!
 It should arrive at your location today.
 
 ${trackingDetails.trackingUrl ? `Track your package: ${trackingDetails.trackingUrl}` : ''}
@@ -162,11 +162,11 @@ ${trackingDetails.trackingUrl ? `Track your package: ${trackingDetails.trackingU
 
     case 'delivered':
       messageBody = `
-Your FashionCenter order #${trackingDetails.orderNumber} has been delivered!
+Your ApparelCast order #${trackingDetails.orderNumber} has been delivered!
 We hope you enjoy your purchase.
 
 Please let us know if you have any questions or feedback.
-Thank you for shopping with FashionCenter!
+Thank you for shopping with ApparelCast!
 `;
       break;
   }

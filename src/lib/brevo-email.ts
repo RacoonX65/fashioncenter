@@ -1,5 +1,5 @@
 /**
- * Brevo (Sendinblue) Email Integration for FashionCenter
+ * Brevo (Sendinblue) Email Integration for ApparelCast
  * 
  * Handles all transactional emails including:
  * - Order confirmations
@@ -51,8 +51,8 @@ export async function sendOrderConfirmationEmail(orderData: OrderEmailData) {
       { email: orderData.customerEmail, name: orderData.customerName }
     ];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      name: 'ApparelCast',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     // HTML email template
@@ -78,7 +78,7 @@ export async function sendOrderConfirmationEmail(orderData: OrderEmailData) {
             </div>
             <div class="content">
               <p>Hi ${orderData.customerName},</p>
-              <p>Thank you for shopping with FashionCenter! Your order has been received and is being processed.</p>
+              <p>Thank you for shopping with ApparelCast! Your order has been received and is being processed.</p>
               
               <div class="order-details">
                 <h2>Order #${orderData.orderNumber}</h2>
@@ -103,12 +103,12 @@ export async function sendOrderConfirmationEmail(orderData: OrderEmailData) {
               <p>We'll send you another email when your order ships with tracking information.</p>
               
               <p>You can track your order anytime at:<br>
-              <a href="https://fashioncenter.co.za/orders/${orderData.orderNumber}">Track Your Order</a></p>
+              <a href="https://apparelcast.shop/orders/${orderData.orderNumber}">Track Your Order</a></p>
               
-              <p>If you have any questions, please contact us at info@fashioncenter.co.za</p>
+              <p>If you have any questions, please contact us at info@apparelcast.shop</p>
             </div>
             <div class="footer">
-              <p>© ${new Date().getFullYear()} FashionCenter. All rights reserved.</p>
+              <p>© ${new Date().getFullYear()} ApparelCast. All rights reserved.</p>
               <p>Johannesburg, South Africa</p>
             </div>
           </div>
@@ -136,8 +136,8 @@ export async function sendShippingNotificationEmail(shippingData: ShippingEmailD
       { email: shippingData.customerEmail, name: shippingData.customerName }
     ];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      name: 'ApparelCast',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -172,14 +172,14 @@ export async function sendShippingNotificationEmail(shippingData: ShippingEmailD
               </div>
               
               <p>You can also track your order on our website:<br>
-              <a href="https://fashioncenter.co.za/orders/${shippingData.orderNumber}">View Order Status</a></p>
+              <a href="https://apparelcast.shop/orders/${shippingData.orderNumber}">View Order Status</a></p>
               
               <p>Your package should arrive within 2-4 business days for standard shipping.</p>
               
-              <p>If you have any questions, please contact us at info@fashioncenter.co.za</p>
+              <p>If you have any questions, please contact us at info@apparelcast.shop</p>
             </div>
             <div class="footer">
-              <p>© ${new Date().getFullYear()} FashionCenter. All rights reserved.</p>
+              <p>© ${new Date().getFullYear()} ApparelCast. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -215,8 +215,8 @@ export async function sendAdminOrderNotification(orderData: OrderEmailData) {
     sendSmtpEmail.subject = `🔔 New Order: ${orderData.orderNumber}`;
     sendSmtpEmail.to = adminEmails.map(email => ({ email: email! }));
     sendSmtpEmail.sender = {
-      name: 'FashionCenter System',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      name: 'ApparelCast System',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -258,7 +258,7 @@ export async function sendAdminOrderNotification(orderData: OrderEmailData) {
                 <h3>Shipping Address:</h3>
                 <p>${orderData.shippingAddress.replace(/\n/g, '<br>')}</p>
                 
-                <a href="https://fashioncenter.co.za/admin" class="button">View in Admin Dashboard</a>
+                <a href="https://apparelcast.shop/admin" class="button">View in Admin Dashboard</a>
               </div>
               
               <p><strong>Action Required:</strong> Please process this order in the admin dashboard.</p>
@@ -290,8 +290,8 @@ export async function sendDeliveryConfirmationEmail(
     sendSmtpEmail.subject = `Your Order Has Been Delivered! - ${orderNumber}`;
     sendSmtpEmail.to = [{ email: customerEmail, name: customerName }];
     sendSmtpEmail.sender = {
-      name: 'FashionCenter',
-      email: process.env.BREVO_SENDER_EMAIL || 'noreply@fashioncenter.co.za'
+      name: 'ApparelCast',
+      email: process.env.BREVO_SENDER_EMAIL || 'noreply@apparelcast.shop'
     };
     
     sendSmtpEmail.htmlContent = `
@@ -318,15 +318,15 @@ export async function sendDeliveryConfirmationEmail(
               <h2>Your order has been delivered!</h2>
               <p>Hi ${customerName},</p>
               <p>Your order #${orderNumber} has been successfully delivered.</p>
-              <p>We hope you love your new items from FashionCenter!</p>
+              <p>We hope you love your new items from ApparelCast!</p>
               
-              <a href="https://fashioncenter.co.za/products" class="button">Shop Again</a>
+              <a href="https://apparelcast.shop/products" class="button">Shop Again</a>
               
               <p>Have feedback? We'd love to hear from you!<br>
-              Email us at info@fashioncenter.co.za</p>
+              Email us at info@apparelcast.shop</p>
             </div>
             <div class="footer">
-              <p>© ${new Date().getFullYear()} FashionCenter. All rights reserved.</p>
+              <p>© ${new Date().getFullYear()} ApparelCast. All rights reserved.</p>
             </div>
           </div>
         </body>

@@ -1,0 +1,15 @@
+# robots.txt for FashionCenter
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /account/
+
+# Sitemap
+Sitemap: https://fashioncenter.co.za/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
